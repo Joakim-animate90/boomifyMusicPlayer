@@ -1,3 +1,5 @@
+import 'package:boomify_app/login/utils/email_text_field.dart';
+import 'package:boomify_app/login/utils/password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +18,12 @@ class LoginPage extends StatelessWidget{
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: const <Widget>[
               Logo(),
+              SizedBox(height: 48.0),
+              EmailTextField(),
+              SizedBox(height: 8.0),
+              PassWordField(),
+              SizedBox(height: 24.0),
+              LoginPage(),
             ],
         ),
         ),
