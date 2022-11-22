@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'page.dart';
 
 class EmailTextField extends StatelessWidget {
   const EmailTextField({super.key});
@@ -8,7 +8,7 @@ class EmailTextField extends StatelessWidget {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'boomify@gmail.com',
+      //initialValue: 'Enter Email',
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),

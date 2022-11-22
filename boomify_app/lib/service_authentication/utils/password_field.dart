@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+part of 'page.dart';
+
 
 class PassWordField extends StatelessWidget {
   const PassWordField({super.key});
@@ -7,7 +8,7 @@ class PassWordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       autofocus: false,
-      initialValue: 'some password',
+     // initialValue: 'some password',
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Password',
