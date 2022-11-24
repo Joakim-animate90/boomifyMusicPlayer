@@ -7,10 +7,33 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  AuthenticationBloc() : super(_firebaseAuth.userChanges().listen((User? user) => {
-
-  }) == null ? AuthenticationUnauthenticated() : AuthenticationAuthenticated(user: _firebaseAuth.currentUser!));
-
+  AuthenticationBloc() : super(AuthenticationUnauthenticated()){
+    on<LogInWithEmailAndPasswordEvent>(_onLogInWithEmailAndPasswordEvent);
+    on<SignUpWithEmailAndPasswordEvent>(_onSignUpWithEmailAndPasswordEvent);
+    on<LogoutRequested>(_onLogoutRequested);
+  }
+  void _onLogInWithEmailAndPasswordEvent(LogInWithEmailAndPasswordEvent event, Emitter<AuthenticationState> emit) async {
+    try {
+      emit(AuthenticationLoading());
+      await _firebaseAuth.signInWithEmailAndPassword(email: event.email, password: event.password);
+      emit(AuthenticationAuthenticated(user: _firebaseAuth.currentUser));
+    } catch (e) {
+      emit(AuthenticationError(message: e.toString()));
+    }
+  }
+  void _onSignUpWithEmailAndPasswordEvent(SignUpWithEmailAndPasswordEvent event, Emitter<AuthenticationState> emit) async {
+    try {
+      emit(AuthenticationLoading());
+      await _firebaseAuth.createUserWithEmailAndPassword(email: event.email, password: event.password);
+      emit(AuthenticationAuthenticated(user: _firebaseAuth.currentUser));
+    } catch (e) {
+      emit(AuthenticationError(message: e.toString()));
+    }
+  }
+  void _onLogoutRequested(LogoutRequested event, Emitter<AuthenticationState> emit) async {
+    await _firebaseAuth.signOut();
+    emit(AuthenticationUnauthenticated());
+  }
 
 
 }

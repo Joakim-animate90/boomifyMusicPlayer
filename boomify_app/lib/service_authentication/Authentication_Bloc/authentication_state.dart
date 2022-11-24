@@ -20,6 +20,8 @@ class AuthenticationLoading extends AuthenticationState {
   List<Object> get props => [];
 }
 class AuthenticationError extends AuthenticationState {
+  const AuthenticationError({required this.message});
+  final String message;
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
 }
