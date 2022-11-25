@@ -7,7 +7,7 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  AuthenticationBloc() : super(AuthenticationUnauthenticated()){
+  AuthenticationBloc() : super(AuthenticationLoading()){
     on<LogInWithEmailAndPasswordEvent>(_onLogInWithEmailAndPasswordEvent);
     on<SignUpWithEmailAndPasswordEvent>(_onSignUpWithEmailAndPasswordEvent);
     on<LogoutRequested>(_onLogoutRequested);
