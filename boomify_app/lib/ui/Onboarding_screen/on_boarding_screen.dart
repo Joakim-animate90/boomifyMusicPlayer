@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../helpers/helper.dart';
 import '../../service_authentication/Authentication_Bloc/authentication_bloc.dart';
 import '../../utils/constants.dart';
+import '../welcome_screen/welcome_page.dart';
 import 'onboarding_cubit.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -62,7 +64,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       child:
                       BlocListener<AuthenticationBloc, AuthenticationState>(
                         listener: (context, state) {
-                          if (state.authState == AuthState.unauthenticated) {
+                          if (state is AuthenticationUnauthenticated) {
                             pushAndRemoveUntil(
                                 context, const WelcomeScreen(), false);
                           }

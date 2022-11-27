@@ -32,3 +32,13 @@ class SignUpWithEmailAndPasswordEvent extends AuthenticationEvent {
   @override
   List<Object> get props => [email, password, imageData, firstName, lastName];
 }
+class FinishedOnBoardingEvent extends AuthenticationEvent {
+  @override
+  List<Object> get props => [];
+
+}
+
+class CheckFirstRunEvent extends AuthenticationEvent {
+  @override
+  List<Object> get props => [];
+}

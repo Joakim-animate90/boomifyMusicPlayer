@@ -3,7 +3,10 @@ part of 'authentication_bloc.dart';
 abstract class AuthenticationState extends Equatable {
   const AuthenticationState();
 }
-
+class AuthenticationOnBoarding extends AuthenticationState {
+  @override
+  List<Object> get props => [];
+}
 class AuthenticationAuthenticated extends AuthenticationState {
   final User? user;
   const AuthenticationAuthenticated({required this.user});
@@ -25,3 +28,4 @@ class AuthenticationError extends AuthenticationState {
   @override
   List<Object> get props => [message];
 }
+
