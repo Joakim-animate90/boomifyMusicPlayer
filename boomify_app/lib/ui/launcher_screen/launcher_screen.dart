@@ -1,3 +1,14 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../helpers/helper.dart';
+import '../../service_authentication/Authentication_Bloc/authentication_bloc.dart';
+import '../../utils/constants.dart';
+import '../Onboarding_screen/data.dart';
+import '../Onboarding_screen/on_boarding_screen.dart';
+import '../welcome_screen/welcome_page.dart';
+
 class LauncherScreen extends StatefulWidget {
   const LauncherScreen({Key? key}) : super(key: key);
 
@@ -9,7 +20,7 @@ class _LauncherScreenState extends State<LauncherScreen> {
   @override
   void initState() {
     super.initState();
-    //context.read<AuthenticationBloc>().add(CheckFirstRunEvent());
+    context.read<AuthenticationBloc>().add(CheckFirstRunEvent());
   }
 
   @override
@@ -18,20 +29,18 @@ class _LauncherScreenState extends State<LauncherScreen> {
       backgroundColor: const Color(colorPrimary),
       body: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
-          switch (state.authSt) {
-            case AuthState.firstRun:
+          switch (state.runtimeType) {
+            case AuthenticationOnBoarding:
               pushReplacement(
                   context,
                   OnBoardingScreen(
-                    images: imageList
+                    images: imageList,
                     titles: titlesList,
                     subtitles: subtitlesList,
                   ));
               break;
-            case AuthState.authenticated:
-              pushReplacement(context, HomeScreen(user: state.user!));
-              break;
-            case AuthState.unauthenticated:
+
+            case AuthenticationUnauthenticated:
               pushReplacement(context, const WelcomeScreen());
               break;
           }

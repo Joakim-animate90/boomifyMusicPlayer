@@ -1,5 +1,6 @@
 import 'package:boomify_app/service_authentication/Authentication_Bloc/authentication_bloc.dart';
 import 'package:boomify_app/service_authentication/login/login_page.dart';
+import 'package:boomify_app/ui/launcher_screen/launcher_screen.dart';
 import 'package:boomify_app/ui/welcome_screen/welcome_bloc.dart';
 import 'package:boomify_app/ui/welcome_screen/welcome_page.dart';
 import 'package:boomify_app/utils/constants.dart';
@@ -112,7 +113,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 brightness: Brightness.dark)),
         debugShowCheckedModeBanner: false,
         color: const Color(colorPrimary),
-        home: const WelcomeScreen());
+        home: const LauncherScreen());
   }
 
   @override

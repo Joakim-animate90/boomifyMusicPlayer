@@ -21,7 +21,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     prefs = await SharedPreferences.getInstance();
     finishedOnBoarding = prefs.getBool('finishedOnBoarding') ?? false;
     if (!finishedOnBoarding) {
-      emit(AuthenticationOnBoarding());
+      emit(const AuthenticationOnBoarding());
     } else {
       if (_firebaseAuth.currentUser != null) {
         emit(AuthenticationAuthenticated(user: _firebaseAuth.currentUser));

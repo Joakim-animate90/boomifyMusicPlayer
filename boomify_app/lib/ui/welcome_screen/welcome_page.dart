@@ -13,7 +13,9 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<WelcomeBloc, WelcomeState>(listener: (context, state) {
+    return Scaffold(
+        backgroundColor:  Colors.white,
+        body:BlocListener<WelcomeBloc, WelcomeState>(listener: (context, state) {
       switch (state.runtimeType) {
         case WelcomeStateLogin:
           push(context, const LoginScreen());
@@ -30,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
       children: <Widget>[
         Center(
           child: Image.asset(
-            'assets/images/welcome_image.png',
+            'assets/images/welcome_image.webp',
             width: 150.0,
             height: 150.0,
             fit: BoxFit.cover,
@@ -40,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
           padding: EdgeInsets.only(
               left: 16, top: 32, right: 16, bottom: 8),
           child: Text(
-            'Say Hello To Your New App!',
+            'Boomify!',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color(colorPrimary),
@@ -51,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
           child: Text(
-            'You\'ve just saved a week of development and headaches.',
+            'Boomify songs you listen to anywhere',
             style: TextStyle(fontSize: 18),
             textAlign: TextAlign.center,
           ),
@@ -109,7 +111,7 @@ class WelcomeScreen extends StatelessWidget {
         )
       ],
     ),
-
+        )
 
     );
   }

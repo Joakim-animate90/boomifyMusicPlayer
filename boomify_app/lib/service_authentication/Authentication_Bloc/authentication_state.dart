@@ -4,6 +4,7 @@ abstract class AuthenticationState extends Equatable {
   const AuthenticationState();
 }
 class AuthenticationOnBoarding extends AuthenticationState {
+  const AuthenticationOnBoarding();
   @override
   List<Object> get props => [];
 }
