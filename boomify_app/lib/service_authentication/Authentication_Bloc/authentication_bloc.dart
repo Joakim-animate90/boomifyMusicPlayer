@@ -7,7 +7,8 @@ part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
-  static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  User? user;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   late SharedPreferences prefs;
   late bool finishedOnBoarding;
   AuthenticationBloc() : super(AuthenticationLoading()){
@@ -24,7 +25,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       emit(const AuthenticationOnBoarding());
     } else {
       if (_firebaseAuth.currentUser != null) {
-        emit(AuthenticationAuthenticated(user: _firebaseAuth.currentUser));
+        user = _firebaseAuth.currentUser;
+        emit(AuthenticationAuthenticated(user: user!));
       } else {
         emit(AuthenticationUnauthenticated());
       }
@@ -34,8 +36,16 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   void _onLogInWithEmailAndPasswordEvent(LogInWithEmailAndPasswordEvent event, Emitter<AuthenticationState> emit) async {
     try {
       emit(AuthenticationLoading());
-      await _firebaseAuth.signInWithEmailAndPassword(email: event.email, password: event.password);
-      emit(AuthenticationAuthenticated(user: _firebaseAuth.currentUser));
+      if (event.email.isEmpty || event.password.isEmpty) {
+        emit(const AuthenticationError(message: 'Please fill in all fields'));
+      } else {
+
+        await _firebaseAuth.signInWithEmailAndPassword(
+            email: event.email, password: event.password);
+        user = _firebaseAuth.currentUser;
+        emit(AuthenticationAuthenticated(user: user!));
+      }
+
     } catch (e) {
       emit(AuthenticationError(message: e.toString()));
     }
@@ -43,8 +53,18 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   void _onSignUpWithEmailAndPasswordEvent(SignUpWithEmailAndPasswordEvent event, Emitter<AuthenticationState> emit) async {
     try {
       emit(AuthenticationLoading());
-      await _firebaseAuth.createUserWithEmailAndPassword(email: event.email, password: event.password);
-      emit(AuthenticationAuthenticated(user: _firebaseAuth.currentUser));
+      if (event.email.isEmpty || event.password.isEmpty) {
+        emit(const AuthenticationError(message: 'Please fill in all fields'));
+      } else {
+        await _firebaseAuth.createUserWithEmailAndPassword(
+            email: event.email, password: event.password);
+        user = _firebaseAuth.currentUser;
+        emit(AuthenticationAuthenticated(user: user!));
+      }
+      print('User created');
+      print(_firebaseAuth.currentUser!.uid);
+      print(_firebaseAuth.currentUser!.email);
+
     } catch (e) {
       emit(AuthenticationError(message: e.toString()));
     }

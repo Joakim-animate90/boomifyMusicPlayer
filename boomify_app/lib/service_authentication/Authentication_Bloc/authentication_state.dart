@@ -9,11 +9,11 @@ class AuthenticationOnBoarding extends AuthenticationState {
   List<Object> get props => [];
 }
 class AuthenticationAuthenticated extends AuthenticationState {
-  final User? user;
+  final User user;
   const AuthenticationAuthenticated({required this.user});
 
   @override
-  List<Object> get props => [user!];
+  List<Object> get props => [user];
 }
 class AuthenticationUnauthenticated extends AuthenticationState {
   @override

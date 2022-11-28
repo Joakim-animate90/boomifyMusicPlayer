@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import '../utils/constants.dart';
+String? validateName(String? value) {
+  String pattern = r'(^[a-zA-Z ]*$)';
+  RegExp regExp = RegExp(pattern);
+  if (value?.isEmpty ?? true) {
+    return "Name is required";
+  } else if (!regExp.hasMatch(value ?? '')) {
+    return "Name must be a-z and A-Z";
+  }
+  return null;
+}
 
 String? validateMobile(String? value) {
   String pattern = r'(^\+?[0-9]*$)';

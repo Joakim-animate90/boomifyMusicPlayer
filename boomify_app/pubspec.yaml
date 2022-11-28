@@ -44,6 +44,8 @@ dependencies:
   firebase_core: ^2.3.0
   smooth_page_indicator: ^1.0.0+2
   shared_preferences: ^2.0.15
+  image_picker: ^0.8.6
+  file_picker: ^5.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

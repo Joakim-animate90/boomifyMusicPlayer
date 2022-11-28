@@ -1,5 +1,9 @@
 import 'package:boomify_app/service_authentication/Authentication_Bloc/authentication_bloc.dart';
+import 'package:boomify_app/service_authentication/login/login_bloc.dart';
 import 'package:boomify_app/service_authentication/login/login_page.dart';
+import 'package:boomify_app/service_authentication/sign_up/signUp_page.dart';
+import 'package:boomify_app/service_authentication/sign_up/sign_up_bloc.dart';
+import 'package:boomify_app/service_authentication/utils/loading_cubit.dart';
 import 'package:boomify_app/ui/launcher_screen/launcher_screen.dart';
 import 'package:boomify_app/ui/welcome_screen/welcome_bloc.dart';
 import 'package:boomify_app/ui/welcome_screen/welcome_page.dart';
@@ -12,14 +16,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-
-
-      runApp(MultiBlocProvider(providers: [
+  runApp(MultiBlocProvider(providers: [
     BlocProvider<AuthenticationBloc>(
         create: (BuildContext context) => AuthenticationBloc()),
+    BlocProvider<LoadingCubit>(create:(BuildContext context) => LoadingCubit()),
+    BlocProvider<LoginBloc>(create: (BuildContext context) => LoginBloc()),
+    BlocProvider<SignUpBloc>(create: (BuildContext context) => SignUpBloc()),
     BlocProvider<WelcomeBloc>(create: (BuildContext context) => WelcomeBloc())
   ], child: const MyApp()));
-
 }
 
 class MyApp extends StatefulWidget {
@@ -39,7 +43,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     try {
       // Wait for Firebase to initialize and set `_initialized` state to true
 
-        await Firebase.initializeApp();
+      await Firebase.initializeApp();
 
       setState(() {
         _initialized = true;
@@ -58,25 +62,25 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if (_error) {
       return MaterialApp(
           home: Scaffold(
-            body: Container(
-              color: Colors.white,
-              child: Center(
-                  child: Column(
-                    children: const [
-                      Icon(
-                        Icons.error_outline,
-                        color: Colors.red,
-                        size: 25,
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        'Failed to initialise firebase!',
-                        style: TextStyle(color: Colors.red, fontSize: 25),
-                      ),
-                    ],
-                  )),
-            ),
-          ));
+        body: Container(
+          color: Colors.white,
+          child: Center(
+              child: Column(
+            children: const [
+              Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 25,
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Failed to initialise firebase!',
+                style: TextStyle(color: Colors.red, fontSize: 25),
+              ),
+            ],
+          )),
+        ),
+      ));
     }
 
     // Show a loader until FlutterFire is initialized
@@ -94,7 +98,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
           brightness: Brightness.light,
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBarTheme:
-          const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
+              const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
           snackBarTheme: const SnackBarThemeData(
               contentTextStyle: TextStyle(color: Colors.white)),
           colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -122,4 +126,3 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     initializeFlutterFire();
   }
 }
-
