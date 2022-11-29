@@ -28,7 +28,6 @@ migrate_working_dir/
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
-.lib/boomify_app
 .pub-cache/
 .pub/
 /build/

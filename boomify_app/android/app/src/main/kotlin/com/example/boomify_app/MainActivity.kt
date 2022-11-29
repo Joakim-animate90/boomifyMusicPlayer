@@ -1,6 +1,0 @@
-package com.example.boomify_app
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity() {
-}
