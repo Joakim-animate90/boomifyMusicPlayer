@@ -7,7 +7,7 @@
 Boomify is an app that can identify music and TV shows by listening to a short sample of their audio.And it can also play music and TV shows from your phone.
 
 ## Boomify OnBoarding   
-![alt text](assets/images/Screen1.png "Booomify") ![alt text](assets/images/Screen2.png "Booomify") ![alt text](assets/images/Screen3.png "Booomify") ![alt text](assets/images/Screen4.png "Booomify") ![alt text](assets/images/Screen5.png "Booomify") {width=50%}
+![alt text](assets/images/Screen1.png "Booomify") ![alt text](assets/images/Screen2.png "Booomify") ![alt text](assets/images/Screen3.png "Booomify") ![alt text](assets/images/screen5.png "Booomify")
 
 
 
@@ -35,16 +35,20 @@ Boomify is a fully functional app that provides Flutter developers with a coded 
 On authentication screens, users can login with Google, or email. They can also create a new account with email and password. The app uses Firebase Authentication to handle user authentication and flutter_bloc to manage the state of the authentication screens.
 * Login and Register Screens
   ## Login and Register Screen
-    ![alt text](assets/images/screen_login_signUp.png "Booomify"){width=50%}
+    ![alt text](assets/images/screen_login_signUp.png "Booomify")
 * Sign Up
   ## Sign Up Screen
-    ![alt text](assets/images/Screen_signUp.png "Booomify"){width=50%}
+    ![alt text](assets/images/Screen_signUp.png "Booomify")
 
 * Login Screen
   ## Login Screen
-    ![alt text](assets/images/screen_login.png "Booomify"){width=50%}
+    ![alt text](assets/images/screen_login.png "Booomify")
 
-
+## Other Additional Advantages
+* Beautiful UI
+* Modularized Code
+* Loading State
+* Error Handling
 ## How to use?
 
 1. Download the app from [here](com.booomify.booomify.apk)
@@ -59,9 +63,7 @@ On authentication screens, users can login with Google, or email. They can also 
 5. Merge
 6. Celebrate
 
-## License
 
-[MIT](LICENSE)
 
 ## Credits
     
@@ -71,6 +73,11 @@ On authentication screens, users can login with Google, or email. They can also 
 
 ## Contributors
 
+- [Joakim Bwire](https://github.com/Joakim-animate90)~Software Engineer and a great Chess Player.
+
+## License
+
+MIT LICENSE
 
 
 
