@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   final GlobalKey<FormState> _key = GlobalKey();
   AutovalidateMode _validate = AutovalidateMode.disabled;
-  late final String email, password;
+  String? email, password;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +37,13 @@ class _LoginScreen extends State<LoginScreen> {
             listeners: [
               BlocListener<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) async {
-                  await context.read<LoadingCubit>().hideLoading();
+                 // await context.read<LoadingCubit>().hideLoading();
+                  print("state is $state");
                   if (state is AuthenticationAuthenticated) {
-                    if (!mounted) return;
+                    //if (!mounted) return;
+                    print("i am here");
                     pushAndRemoveUntil(
-                        context, HomeScreen(user: state.user,), false);
+                        context, HomeScreen(user: state.user!,), false);
                   } else {
                     if (!mounted) return;
                     if (state is AuthenticationError ){
@@ -56,15 +58,14 @@ class _LoginScreen extends State<LoginScreen> {
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) async {
                   if (state is ValidLoginFields) {
-                    await context.read<LoadingCubit>().showLoading(
-                        context, 'Logging in, Please wait...', false);
-                    if (!mounted) return;
+
                     context.read<AuthenticationBloc>().add(
                       LogInWithEmailAndPasswordEvent(
-                        email: email,
-                        password: password,
-                      ),
+                        email: email!,
+                        password: password!,
+                      ) ,
                     );
+                    print("i am here2");
                   }
                 },
               ),

@@ -1,11 +1,12 @@
 import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../helpers/helper.dart';
+import '../../models/user_model.dart';
 import '../../service_authentication/Authentication_Bloc/authentication_bloc.dart';
 import '../../utils/constants.dart';
 import '../welcome_screen/welcome_page.dart';
@@ -137,7 +138,7 @@ class _HomeState extends State<HomeScreen> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              user.photoURL == ''
+              user.profilePictureURL == ''
                   ? CircleAvatar(
                 radius: 35,
                 backgroundColor: Colors.grey.shade400,
@@ -152,10 +153,10 @@ class _HomeState extends State<HomeScreen> {
                   ),
                 ),
               )
-                  : displayCircleImage(user.photoURL!, 80, false),
+                  : displayCircleImage(user.profilePictureURL!, 80, false),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(user.displayName!),
+                child: Text(user.fullName()),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -163,7 +164,7 @@ class _HomeState extends State<HomeScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(user.uid),
+                child: Text(user.userID!),
               ),
             ],
           ),

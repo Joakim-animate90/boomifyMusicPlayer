@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUpScreen> {
                   context.read<LoadingCubit>().hideLoading();
                   if (state is AuthenticationAuthenticated) {
                     pushAndRemoveUntil(
-                        context, HomeScreen(user: state.user,), false);
+                        context, HomeScreen(user: state.user!,), false);
                   } else {
                     if (state is AuthenticationError){
                       print(state.message);
@@ -58,13 +58,15 @@ class _SignUpState extends State<SignUpScreen> {
                 listener: (context, state) async {
                   if (state is ValidFields) {
 
+                    //if (!mounted) return;
+
                     context.read<AuthenticationBloc>().add(
                         SignUpWithEmailAndPasswordEvent(
-                            email: email!,
-                            password: password!,
-                            imageData: _imageData!,
-                            lastName: lastName!,
-                            firstName: firstName!));
+                            email: email ?? '',
+                            password: password ?? '',
+                            imageData: _imageData ?? Uint8List(0),
+                            lastName: lastName ?? '',
+                            firstName: firstName ?? ''));
                   } else if (state is SignUpError) {
                     showSnackBar(context, state.errorMessage);
                   }
@@ -206,6 +208,8 @@ class _SignUpState extends State<SignUpScreen> {
                               textInputAction: TextInputAction.next,
                               validator: validateEmail,
                               onSaved: (String? val) {
+                                print("onSaved email: $val");
+                                print(val);
                                 email = val;
                               },
                               decoration: getInputDecoration(
@@ -223,6 +227,7 @@ class _SignUpState extends State<SignUpScreen> {
                               controller: _passwordController,
                               validator: validatePassword,
                               onSaved: (String? val) {
+                                print("onSaved password: $val");
                                 password = val;
                               },
                               style:

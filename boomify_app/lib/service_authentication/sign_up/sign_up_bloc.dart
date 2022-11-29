@@ -66,6 +66,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   void _ValidateFieldsEvent(
       ValidateFieldsEvent event, Emitter<SignUpState> emit) async {
     if (event.key.currentState!.validate() && event.acceptEula) {
+      event.key.currentState!.save();
       emit(const ValidFields());
     } else {
       emit(const SignUpError(errorMessage: 'Please fill all fields'));
