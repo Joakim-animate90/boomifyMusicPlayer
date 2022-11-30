@@ -49,6 +49,13 @@ On authentication screens, users can login with Google, or email. They can also 
 * Modularized Code
 * Loading State
 * Error Handling
+
+## Building from Source
+* If you don't have Flutter installed, follow the [Flutter Setup Guide](https://flutter.dev/setup/).
+* Fetch the latest code from master.
+* Run `flutter pub get` to install dependencies.
+* Run `flutter run` to build and run the app.
+* Run `flutter test` to run the tests.
 ## How to use?
 
 1. Download the app from [here](com.booomify.booomify.apk)
